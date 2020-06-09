@@ -1,5 +1,7 @@
 # amplicon_coverage_plot
 
+The script will generate an [interactive barplot](https://chienchi.github.io/amplicon_coverage_plot/index.html) given amplicon info in bed/bedpe format and coverage information in cov/bam file.
+
 ## Dependencies
 
 ### Programming/Scripting languages
