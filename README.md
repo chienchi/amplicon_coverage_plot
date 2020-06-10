@@ -75,6 +75,6 @@ cd tests
 
 -- prefix_amplicon_coverage.html
 
-<a href="https://chienchi.github.io/amplicon_coverage_plot/index.html">![html](https://user-images.githubusercontent.com/737589/84065927-65623900-a982-11ea-8575-b408d490f866.png)</a>
+<a href="https://chienchi.github.io/amplicon_coverage_plot/index.html">![html](https://user-images.githubusercontent.com/737589/84234283-2d0d4880-aab1-11ea-8d9d-40c78a0e6a85.png)</a>
 
 
