@@ -11,6 +11,7 @@ install:
 
 script:
   - amplicov --help
+  - amplicov --version
   - amplicov --bed tests/input.bed --cov tests/coverage.txt --prefix output --outdir tests/output 
 
 
