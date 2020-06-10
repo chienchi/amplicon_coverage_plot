@@ -6,12 +6,14 @@ python:
 
 
 install:
-  - pip install codecov coverage
+  - pip install coverage
   - pip install -e . 
 
 script:
-  - amplicov --help
-  - amplicov --version
-  - amplicov --bed tests/input.bed --cov tests/coverage.txt --prefix output --outdir tests/output 
+  - coverage run amplicov --help
+  - coverage run amplicov --version
+  - coverage run amplicov --bed tests/input.bed --cov tests/coverage.txt --prefix output --outdir tests/output 
 
+after_success:
+bash <(curl -s https://codecov.io/bash)
 
