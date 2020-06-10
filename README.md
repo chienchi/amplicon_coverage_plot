@@ -20,6 +20,13 @@ The script will generate an [interactive barplot](https://chienchi.github.io/amp
 
 ## Installation
 
+### Install by pip
+
+```
+pip install amplicov
+```
+
+### Install from source
 Clone the `amplicon_coverage_plot` repository.
 
 ```

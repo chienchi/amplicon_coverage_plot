@@ -35,7 +35,7 @@ def setup_argparse():
     outGrp.add_argument('-o', '--outdir', metavar='[PATH]',type=str, default='.', help='output directory')
     outGrp.add_argument('-p', '--prefix', metavar='[STR]',type=str , help='output prefix')
 
-    parser.add_argument('--version', action='version', version='%(prog)s 0.1.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.1.1')
     args_parsed = parser.parse_args()
     if not args_parsed.outdir:
         args_parsed.outdir = os.getcwd()
