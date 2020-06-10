@@ -2,14 +2,15 @@ language: python
 sudo: false
 
 python:
-  - "3.7.7"
+  - "3.7"
+
 
 install:
-  - pip install -r requirements.txt
-  - python setup.py install
+  - pip install codecov coverage
+  - pip install -e . 
 
 script:
-  - amplicon_coverage.py --help
-  - amplicon_coverage.py --bed tests/input.bed --cov tests/coverage.txt --prefix output --outdir tests/output 
+  - amplicov --help
+  - amplicov --bed tests/input.bed --cov tests/coverage.txt --prefix output --outdir tests/output 
 
 

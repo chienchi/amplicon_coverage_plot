@@ -35,6 +35,7 @@ def setup_argparse():
     outGrp.add_argument('-o', '--outdir', metavar='[PATH]',type=str, default='.', help='output directory')
     outGrp.add_argument('-p', '--prefix', metavar='[STR]',type=str , help='output prefix')
 
+    parser.add_argument('--version', action='version', version='%(prog)s 0.1.0')
     args_parsed = parser.parse_args()
     if not args_parsed.outdir:
         args_parsed.outdir = os.getcwd()
@@ -132,6 +133,18 @@ def calculate_mean_cov_per_amplicon(cov_np_array,amplicon_d):
         end = amplicon_d[key][-1]
         mean_dict[key] = cov_np_array[start:end].mean()
     return mean_dict
+    
+def write_dict_to_file(mean_d,uniq_mean_d,outdir,prefix):
+    output_amplicon_cov_txt = outdir + os.sep + prefix + '_amplicon_coverage.txt'
+    try:
+        os.remove(output_amplicon_cov_txt)
+    except OSError:
+        pass
+    with open(output_amplicon_cov_txt,"w") as f:
+        f.write("ID\tWhole_Amplicon\tUnique\n")
+        for key in mean_d:
+            f.write("%s\t%.2f\t%.2f\n" % (key,mean_d[key],uniq_mean_d[key]))
+      
 
 def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
     #plot bar chart
@@ -296,6 +309,7 @@ def run(argvs):
         
     amplicon_mean_d = calculate_mean_cov_per_amplicon(cov_array,amplicon_dict)
     uniq_amplicon_mean_d = calculate_mean_cov_per_amplicon(cov_array,uniq_amplicon_dict)
+    write_dict_to_file(amplicon_mean_d,uniq_amplicon_mean_d,argvs.outdir,argvs.prefix)
     barplot(amplicon_mean_d,uniq_amplicon_mean_d,bedfile,cov_array.mean(),argvs.outdir,argvs.prefix)
 
 if __name__ == '__main__':

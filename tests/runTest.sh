@@ -23,7 +23,7 @@ echo "Running Test ..."
 
 rm -rf $tempdir
 
-$rootdir/../amplicon_coverage_plot/amplicon_coverage.py --bed input.bed --cov coverage.txt --prefix output --outdir $tempdir || true
+$rootdir/../amplicov/amplicov --bed input.bed --cov coverage.txt --prefix output --outdir $tempdir || true
 
 test_result;
 
