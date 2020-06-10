@@ -3,7 +3,7 @@ import sys
 
 setup(
     name='amplicon_coverage_plot',
-    version= 0.1.0,
+    version= '0.1.0',
     author='Chienchi Lo',
     author_email='chienchi@lanl.gov',
     packages=find_packages(),
