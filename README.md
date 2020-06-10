@@ -34,20 +34,21 @@ python setup.py install
 If the installation was succesful, you should be able to type `amplicon_coverage.py -h` and get a help message on how to use the tool.
 
 ```
-amplicon_coverage.py -h
+amplicov -h
 ```
 
 
 ## Usage
 ```
-usage: amplicon_coverage.py [-h] (--bed [FILE] | --bedpe [FILE])
-                            (--bam [FILE] | --cov [FILE]) [-o [PATH]]
-                            [-p [STR]]
+usage: amplicov [-h] (--bed [FILE] | --bedpe [FILE])
+                (--bam [FILE] | --cov [FILE]) [-o [PATH]] [-p [STR]]
+                [--version]
 
 Script to parse amplicon region coverage and generate barplot in html
 
 optional arguments:
   -h, --help            show this help message and exit
+  --version             show program's version number and exit
 
 Amplicon Input (required, mutually exclusive):
   --bed [FILE]          amplicon bed file

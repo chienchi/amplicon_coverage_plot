@@ -17,7 +17,7 @@ class SmartFormatter(ap.HelpFormatter):
             return ap.HelpFormatter._split_lines(self, text, width)
 
 def setup_argparse():
-    parser = ap.ArgumentParser(prog='amplicon_coverage.py',
+    parser = ap.ArgumentParser(prog='amplicov',
         description = '''Script to parse amplicon region coverage and generate barplot in html''',
         formatter_class = SmartFormatter)
 
