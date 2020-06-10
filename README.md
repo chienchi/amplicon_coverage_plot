@@ -83,7 +83,19 @@ cd tests
 
 ## Outputs 
 
+-- prefix_amplicon_coverage.txt
+
+| ID          | Whole_Amplicon | Unique  |
+|-------------|----------------|---------|
+| nCoV-2019_1 | 217.74         | 53.18   | 
+| nCoV-2019_2 | 1552.83        | 1235.50 |
+| nCoV-2019_3 | 3164.22        | 2831.73 |
+| nCoV-2019_4 | 2005.16        | 1658.00 |
+| etc...      |                |         |
+
+
 -- prefix_amplicon_coverage.html
+
 
 <a href="https://chienchi.github.io/amplicon_coverage_plot/index.html">![html](https://user-images.githubusercontent.com/737589/84234283-2d0d4880-aab1-11ea-8d9d-40c78a0e6a85.png)</a>
 
