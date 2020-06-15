@@ -94,10 +94,12 @@ cd tests
 | nCoV-2019_4 | 2005.16        | 1658.00 |
 | etc...      |                |         |
 
+#### Table Header Definition in the amplicon_coverage.txt 
+
+<img width="481" alt="Screen Shot 2020-06-15 at 3 22 17 PM" src="https://user-images.githubusercontent.com/737589/84707575-2ef56280-af1c-11ea-8ccb-1857c1979900.png">
 
 -- prefix_amplicon_coverage.html
 
 
 <a href="https://chienchi.github.io/amplicon_coverage_plot/index.html">![html](https://user-images.githubusercontent.com/737589/84234283-2d0d4880-aab1-11ea-8d9d-40c78a0e6a85.png)</a>
-
 
