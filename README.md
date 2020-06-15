@@ -96,7 +96,7 @@ cd tests
 
 #### Table Header Definition in the amplicon_coverage.txt 
 
-<img width="481" alt="Screen Shot 2020-06-15 at 3 22 17 PM" src="https://user-images.githubusercontent.com/737589/84707575-2ef56280-af1c-11ea-8ccb-1857c1979900.png">
+<img width="465" alt="Screen Shot 2020-06-15 at 3 29 53 PM" src="https://user-images.githubusercontent.com/737589/84708117-1fc2e480-af1d-11ea-8411-35210a8dd6fa.png">
 
 -- prefix_amplicon_coverage.html
 
