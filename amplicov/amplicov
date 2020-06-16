@@ -254,6 +254,19 @@ def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
         )
     ])
 
+    fig.update_xaxes(
+        tickfont=dict(family='Courier New, monospace', size=8),
+        ticks="outside",
+        tickwidth=0.5,
+        ticklen=3
+    )
+    fig.update_yaxes(
+        tickfont=dict(family='Courier New, monospace', size=8),
+        ticks="outside",
+        tickwidth=0.5,
+        ticklen=3
+    )
+
     fig.update_layout(
         updatemenus=updatemenus,
         xaxis_title=x_name,
