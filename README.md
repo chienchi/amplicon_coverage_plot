@@ -51,7 +51,7 @@ amplicov -h
 ## Usage
 ```
 usage: amplicov [-h] (--bed [FILE] | --bedpe [FILE])
-                (--bam [FILE] | --cov [FILE]) [-o [PATH]] [-p [STR]]
+                (--bam [FILE] | --cov [FILE]) [-o [PATH]] [-p [STR]] [--pp]
                 [--version]
 
 Script to parse amplicon region coverage and generate barplot in html
