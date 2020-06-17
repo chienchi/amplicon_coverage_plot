@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, errno
+import os, errno, sys
 import argparse as ap
 import numpy as np
 import csv
@@ -124,18 +124,27 @@ def parse_cov_file(input):
 def parse_bam_file(bam,pp,outdir):
 
     bam_input = bam
-    if (pp):
+    if pp:
         bam_prefix = Path(bam).stem
         bam_input = outdir + os.sep + bam_prefix + ".pp.bam"
         samfile = pysam.AlignmentFile(bam, "rb")
+        ppcount=0;
+        allcount=0;
         proper_pairedreads = pysam.AlignmentFile(bam_input, "wb", template=samfile)
-        for read in samfile.fetch():
+        for read in samfile.fetch(until_eof=True):
+            allcount+=1
             if read.is_proper_pair:
+                ppcount+=1;
                 proper_pairedreads.write(read)
 
-    pairedreads.close()
-    samfile.close()
-
+        proper_pairedreads.close()
+        samfile.close()
+        print("Total Reads: %d" % (allcount))
+        print("Proper Paired Reads: %d" % (ppcount))
+        if ppcount==0:
+            print("Failed: There is no proper paired reads in your input file %s." % (bam))
+            sys.exit()
+        
     cov_list = []
     for line in pysam.samtools.depth("-aa","-d0", bam_input ,split_lines=True):
         id, pos, cov = line.rstrip().split("\t")
