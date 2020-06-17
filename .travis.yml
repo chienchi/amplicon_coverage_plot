@@ -13,6 +13,8 @@ script:
   - coverage run amplicov/amplicov --help
   - coverage run amplicov/amplicov --version
   - coverage run amplicov/amplicov --bed tests/input.bed --cov tests/coverage.txt --prefix output --outdir tests/output 
+  - coverage run amplicov/amplicov --bed tests/input.bed --bam tests/input.bam --prefix output --outdir tests/output 
+  - coverage run amplicov/amplicov --bedpe tests/input.bedpe --pp --bam tests/input.bam --prefix output --outdir tests/output 
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
