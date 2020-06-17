@@ -35,7 +35,10 @@ def setup_argparse():
     outGrp.add_argument('-o', '--outdir', metavar='[PATH]',type=str, default='.', help='output directory')
     outGrp.add_argument('-p', '--prefix', metavar='[STR]',type=str , help='output prefix')
 
-    parser.add_argument('--version', action='version', version='%(prog)s 0.1.1')
+    #optGrp = parser.add_argument_group('Options')
+    parser.add_argument('--pp', action='store_true', help='process proper paired only reads from bam file (illumina)')
+    
+    parser.add_argument('--version', action='version', version='%(prog)s 0.1.2')
     args_parsed = parser.parse_args()
     if not args_parsed.outdir:
         args_parsed.outdir = os.getcwd()
@@ -118,9 +121,23 @@ def parse_cov_file(input):
     cov_array=np.array(cov_list)
     return cov_array
 
-def parse_bam_file(bam):
+def parse_bam_file(bam,pp,outdir):
+
+    bam_input = bam
+    if (pp):
+        bam_prefix = Path(bam).stem
+        bam_input = outdir + os.sep + bam_prefix + ".pp.bam"
+        samfile = pysam.AlignmentFile(bam, "rb")
+        proper_pairedreads = pysam.AlignmentFile(bam_input, "wb", template=samfile)
+        for read in samfile.fetch():
+            if read.is_proper_pair:
+                proper_pairedreads.write(read)
+
+    pairedreads.close()
+    samfile.close()
+
     cov_list = []
-    for line in pysam.samtools.depth("-aa","-d0", "NC_045512.2.sort_sorted.bam",split_lines=True):
+    for line in pysam.samtools.depth("-aa","-d0", bam_input ,split_lines=True):
         id, pos, cov = line.rstrip().split("\t")
         cov_list.append(int(cov))
     cov_array=np.array(cov_list)
@@ -157,41 +174,41 @@ def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
     fig.add_trace(go.Bar(x=uniq_x,y=uniq_y,marker_color='lightsalmon',visible=False))
     
     depthMean = [dict(type='line',
-    		        xref='paper',x0=0,x1=1,
-    		        yref='y',y0=overall_mean,y1=overall_mean,
-    		        line=dict(
-    			        color="red",
-    			        width=1,
-    			        dash='dot',
-    		        )
+                    xref='paper',x0=0,x1=1,
+                    yref='y',y0=overall_mean,y1=overall_mean,
+                    line=dict(
+                        color="red",
+                        width=1,
+                        dash='dot',
+                    )
                 )]
 
     depth5x = [dict(type='line',
-    		        xref='paper',x0=0,x1=1,
-    		        yref='y',y0=5,y1=5,
-    		        line=dict(
-    			        color="black",
-    			        width=1,
-    			        dash='dot',
-    		        )
+                    xref='paper',x0=0,x1=1,
+                    yref='y',y0=5,y1=5,
+                    line=dict(
+                        color="black",
+                        width=1,
+                        dash='dot',
+                    )
                 )]
     depth10x = [dict(type='line',
-    		        xref='paper',x0=0,x1=1,
-    		        yref='10',y0=10,y1=10,
-    		        line=dict(
-    			        color="black",
-    			        width=1,
-    			        dash='dot',
-    		        )
+                    xref='paper',x0=0,x1=1,
+                    yref='10',y0=10,y1=10,
+                    line=dict(
+                        color="black",
+                        width=1,
+                        dash='dot',
+                    )
                 )]
     depth20x = [dict(type='line',
-    		        xref='paper',x0=0,x1=1,
-    		        yref='y',y0=20,y1=20,
-    		        line=dict(
-    			        color="black",
-    			        width=1,
-    			        dash='dot',
-    		        )
+                    xref='paper',x0=0,x1=1,
+                    yref='y',y0=20,y1=20,
+                    line=dict(
+                        color="black",
+                        width=1,
+                        dash='dot',
+                    )
                 )]
 
     updatemenus = list([
@@ -287,15 +304,15 @@ def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
                                 showarrow=False),
         ],
         shapes=[
-    	    dict(type='line',
-    		xref='paper',x0=0,x1=1,
-    		yref='y',y0=overall_mean,y1=overall_mean,
-    		line=dict(
-    			color="red",
-    			width=1,
-    			dash='dashdot',
-    		),
-    	    ),
+            dict(type='line',
+            xref='paper',x0=0,x1=1,
+            yref='y',y0=overall_mean,y1=overall_mean,
+            line=dict(
+                color="red",
+                width=1,
+                dash='dashdot',
+            ),
+            ),
         ]
     )
 
@@ -315,7 +332,7 @@ def run(argvs):
         cov_array = parse_cov_file(argvs.cov)
         prefix = Path(argvs.cov).stem 
     if (argvs.bam):
-        cov_array = parse_bam_file(argvs.bam)
+        cov_array = parse_bam_file(argvs.bam,argvs.pp, argvs.outdir)
         prefix = Path(argvs.bam).stem
     if not argvs.prefix:
         argvs.prefix = prefix

@@ -58,6 +58,8 @@ Script to parse amplicon region coverage and generate barplot in html
 
 optional arguments:
   -h, --help            show this help message and exit
+  --pp                  process proper paired only reads from bam file
+                        (illumina)
   --version             show program's version number and exit
 
 Amplicon Input (required, mutually exclusive):
