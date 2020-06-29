@@ -102,5 +102,7 @@ cd tests
 
 -- prefix_amplicon_coverage.html
 
+```color black for < 5x and blue for <20x```
+
 <a href="https://chienchi.github.io/amplicon_coverage_plot/index.html">![html](https://user-images.githubusercontent.com/737589/86061568-42c4bc80-ba24-11ea-93a1-0348e1dca930.png)</a>
 
