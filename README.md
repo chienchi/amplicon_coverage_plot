@@ -102,6 +102,5 @@ cd tests
 
 -- prefix_amplicon_coverage.html
 
-
-<a href="https://chienchi.github.io/amplicon_coverage_plot/index.html">![html](https://user-images.githubusercontent.com/737589/84234283-2d0d4880-aab1-11ea-8d9d-40c78a0e6a85.png)</a>
+<a href="https://chienchi.github.io/amplicon_coverage_plot/index.html">![html](https://user-images.githubusercontent.com/737589/86061568-42c4bc80-ba24-11ea-93a1-0348e1dca930.png)</a>
 
