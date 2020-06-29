@@ -67,7 +67,7 @@ Amplicon Input (required, mutually exclusive):
   --bedpe [FILE]        amplicon bedpe file
 
 Coverage Input (required, mutually exclusive):
-  --bam [FILE]          bam file
+  --bam [FILE]          sorted bam file (ex: samtools sort input.bam -o sorted.bam)
   --cov [FILE]          coverage file [position coverage]
 
 Output:
