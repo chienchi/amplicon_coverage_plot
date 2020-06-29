@@ -28,7 +28,7 @@ def setup_argparse():
    
     covGrp = parser.add_argument_group('Coverage Input (required, mutually exclusive)')
     covGrp_me = covGrp.add_mutually_exclusive_group(required=True)
-    covGrp_me.add_argument('--bam', metavar='[FILE]', type=str,help='bam file')
+    covGrp_me.add_argument('--bam', metavar='[FILE]', type=str,help='sorted bam file (ex: samtools sort input.bam -o sorted.bam')
     covGrp_me.add_argument('--cov', metavar='[FILE]', type=str,help='coverage file [position\tcoverage]')
     
     outGrp = parser.add_argument_group('Output')
