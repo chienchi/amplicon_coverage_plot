@@ -5,6 +5,7 @@ import numpy as np
 import csv
 import subprocess
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from pathlib import Path
 import pysam
 from collections import defaultdict
@@ -195,7 +196,7 @@ def write_dict_to_file(mean_d,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,outdir,pr
             )
       
 
-def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
+def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall_mean,outdir,prefix):
     #plot bar chart
     x_name=Path(input_bed).stem
     x=list(mean_dict.keys())
@@ -204,8 +205,25 @@ def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
     uniq_y=list(uniq_mean_d.values())
     barcolor1 = ['lightsalmon' if i >= 20 else 'blue' if i >5 else 'black' for i in y]
     barcolor2 = ['lightsalmon' if i >= 20 else 'blue' if i >5 else 'black' for i in uniq_y]
-    fig = go.Figure(data=[go.Bar(x=x, y=y, marker_color=barcolor1,visible=False)])
-    fig.add_trace(go.Bar(x=uniq_x,y=uniq_y,marker_color=barcolor2,visible=True))
+    
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    # coverage levels
+    fig.add_trace(
+      go.Bar(x=uniq_x,y=uniq_y,marker_color=barcolor2,visible=True,name="Coverage"),
+      secondary_y=False
+    )
+
+    #fig = go.Figure(data=[go.Bar(x=x, y=y, marker_color=barcolor1,visible=False)])
+
+    #fig.add_trace(go.Bar(x=uniq_x,y=uniq_y,marker_color=barcolor2,visible=True))
+
+    # Add Ns
+    uniq_y2=list(uniq_ambiguity_d.values())
+    fig.add_trace(
+      go.Scatter(x=uniq_x,y=uniq_y2,marker_color='red',visible=True,name="Number of Ns"),
+      secondary_y=True
+    )
     
     depthMean = [dict(type='line',
                     xref='paper',x0=0,x1=1,
@@ -381,7 +399,7 @@ def run(argvs):
     # Write results to a tab-delimited file
     write_dict_to_file(amplicon_mean_d,uniq_amplicon_mean_d,ambiguity_d,uniq_ambiguity_d,argvs.outdir,argvs.prefix)
 
-    barplot(amplicon_mean_d,uniq_amplicon_mean_d,bedfile,cov_array.mean(),argvs.outdir,argvs.prefix)
+    barplot(amplicon_mean_d,uniq_amplicon_mean_d,ambiguity_d,uniq_ambiguity_d,bedfile,cov_array.mean(),argvs.outdir,argvs.prefix)
 
 if __name__ == '__main__':
     argvs = setup_argparse()
