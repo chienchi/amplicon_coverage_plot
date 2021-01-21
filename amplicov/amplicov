@@ -159,8 +159,21 @@ def calculate_mean_cov_per_amplicon(cov_np_array,amplicon_d):
         end = amplicon_d[key][-1]
         mean_dict[key] = 0 if start > cov_np_array.size else cov_np_array[start:end].mean()
     return mean_dict
+
+def calculate_N_per_amplicon(cov_np_array,amplicon_d):
+    num_low_depth=dict()
+    for key in amplicon_d:
+        start = amplicon_d[key][0]
+        end = amplicon_d[key][-1]
+        if start > cov_np_array.size:
+            num_low_depth[key] = 0
+        else:
+            arr = cov_np_array[start:end]
+            num_low_depth[key] = np.size(np.where(arr < 10))
+            sys.exit()
+    return num_low_depth
     
-def write_dict_to_file(mean_d,uniq_mean_d,outdir,prefix):
+def write_dict_to_file(mean_d,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,outdir,prefix):
     output_amplicon_cov_txt = outdir + os.sep + prefix + '_amplicon_coverage.txt'
     try:
         os.remove(output_amplicon_cov_txt)
@@ -347,9 +360,17 @@ def run(argvs):
     if not argvs.prefix:
         argvs.prefix = prefix
         
+    # Count the number of Ns < 10 per amplicon
+    ambiguity_d = calculate_N_per_amplicon(cov_array,amplicon_dict)
+    uniq_ambiguity_d = calculate_N_per_amplicon(cov_array,uniq_amplicon_dict)
+
+    # Get the coverage per amplicon
     amplicon_mean_d = calculate_mean_cov_per_amplicon(cov_array,amplicon_dict)
     uniq_amplicon_mean_d = calculate_mean_cov_per_amplicon(cov_array,uniq_amplicon_dict)
-    write_dict_to_file(amplicon_mean_d,uniq_amplicon_mean_d,argvs.outdir,argvs.prefix)
+
+    # Write results to a tab-delimited file
+    write_dict_to_file(amplicon_mean_d,uniq_amplicon_mean_d,ambiguity_d,uniq_ambiguity_d,argvs.outdir,argvs.prefix)
+
     barplot(amplicon_mean_d,uniq_amplicon_mean_d,bedfile,cov_array.mean(),argvs.outdir,argvs.prefix)
 
 if __name__ == '__main__':
