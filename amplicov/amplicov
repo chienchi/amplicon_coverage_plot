@@ -5,9 +5,15 @@ import numpy as np
 import csv
 import subprocess
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from pathlib import Path
 import pysam
 from collections import defaultdict
+
+# standardize the logging output
+import logging
+this_script=os.path.basename(__file__)
+logging.basicConfig(format='['+this_script+'] %(levelname)s:%(message)s', level=logging.INFO)
 
 class SmartFormatter(ap.HelpFormatter):
     def _split_lines(self, text, width):
@@ -77,7 +83,7 @@ def covert_bed_to_amplicon_dict(input,unique=False):
 
     outs, errs = proc.communicate()
     if proc.returncode != 0:
-        print("Failed %d %s %s" % (proc.returncode, outs, errs))
+        logging.error("Failed %d %s %s" % (proc.returncode, outs, errs))
 
     return amplicon
 
@@ -105,7 +111,7 @@ def covert_bedpe_to_amplicon_dict(input,unique=False):
 
     outs, errs = proc.communicate()
     if proc.returncode != 0:
-        print("Failed %d %s %s" % (proc.returncode, outs, errs))
+        logging.error("Failed %d %s %s" % (proc.returncode, outs, errs))
 
     return amplicon
 
@@ -139,10 +145,10 @@ def parse_bam_file(bam,pp,outdir):
 
         proper_pairedreads.close()
         samfile.close()
-        print("Total Reads: %d" % (allcount))
-        print("Proper Paired Reads: %d" % (ppcount))
+        logging.info("Total Reads: %d" % (allcount))
+        logging.info("Proper Paired Reads: %d" % (ppcount))
         if ppcount==0:
-            print("Failed: There is no proper paired reads in your input file %s." % (bam))
+            logging.error("Failed: There is no proper paired reads in your input file %s." % (bam))
             sys.exit()
         
     cov_list = []
@@ -159,20 +165,38 @@ def calculate_mean_cov_per_amplicon(cov_np_array,amplicon_d):
         end = amplicon_d[key][-1]
         mean_dict[key] = 0 if start > cov_np_array.size else cov_np_array[start:end].mean()
     return mean_dict
+
+def calculate_N_per_amplicon(cov_np_array,amplicon_d):
+    num_low_depth=dict()
+    for key in amplicon_d:
+        start = amplicon_d[key][0]
+        end = amplicon_d[key][-1]
+        if start > cov_np_array.size:
+            num_low_depth[key] = 0
+        else:
+            arr = cov_np_array[start:end]
+            num_low_depth[key] = np.size(np.where(arr < 10))
+    return num_low_depth
     
-def write_dict_to_file(mean_d,uniq_mean_d,outdir,prefix):
+def write_dict_to_file(mean_d,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,outdir,prefix):
     output_amplicon_cov_txt = outdir + os.sep + prefix + '_amplicon_coverage.txt'
     try:
         os.remove(output_amplicon_cov_txt)
     except OSError:
         pass
     with open(output_amplicon_cov_txt,"w") as f:
-        f.write("ID\tWhole_Amplicon\tUnique\n")
+        f.write("ID\tWhole_Amplicon\tUnique_Amplicon\tWhole_Amplicon_Ns\tUnique_Amplicon_Ns\n")
         for key in mean_d:
-            f.write("%s\t%.2f\t%.2f\n" % (key,mean_d[key],uniq_mean_d[key]))
+            f.write("%s\t%.2f\t%.2f\t%.2f\t%.2f\n" %
+              (
+                key,
+                mean_d[key],uniq_mean_d[key],
+                ambiguity_d[key],uniq_ambiguity_d[key]
+              )
+            )
       
 
-def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
+def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall_mean,outdir,prefix):
     #plot bar chart
     x_name=Path(input_bed).stem
     x=list(mean_dict.keys())
@@ -181,8 +205,25 @@ def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
     uniq_y=list(uniq_mean_d.values())
     barcolor1 = ['lightsalmon' if i >= 20 else 'blue' if i >5 else 'black' for i in y]
     barcolor2 = ['lightsalmon' if i >= 20 else 'blue' if i >5 else 'black' for i in uniq_y]
-    fig = go.Figure(data=[go.Bar(x=x, y=y, marker_color=barcolor1,visible=False)])
-    fig.add_trace(go.Bar(x=uniq_x,y=uniq_y,marker_color=barcolor2,visible=True))
+    
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    # coverage levels
+    fig.add_trace(
+      go.Bar(x=uniq_x,y=uniq_y,marker_color=barcolor2,visible=True,name="Coverage"),
+      secondary_y=False
+    )
+
+    #fig = go.Figure(data=[go.Bar(x=x, y=y, marker_color=barcolor1,visible=False)])
+
+    #fig.add_trace(go.Bar(x=uniq_x,y=uniq_y,marker_color=barcolor2,visible=True))
+
+    # Add Ns
+    uniq_y2=list(uniq_ambiguity_d.values())
+    fig.add_trace(
+      go.Scatter(x=uniq_x,y=uniq_y2,marker_color='red',visible=True,name="Number of Ns"),
+      secondary_y=True
+    )
     
     depthMean = [dict(type='line',
                     xref='paper',x0=0,x1=1,
@@ -346,11 +387,19 @@ def run(argvs):
         prefix = Path(argvs.bam).stem
     if not argvs.prefix:
         argvs.prefix = prefix
-        
+
+    # Count the number of Ns < 10 per amplicon
+    ambiguity_d = calculate_N_per_amplicon(cov_array,amplicon_dict)
+    uniq_ambiguity_d = calculate_N_per_amplicon(cov_array,uniq_amplicon_dict)
+
+    # Get the coverage per amplicon
     amplicon_mean_d = calculate_mean_cov_per_amplicon(cov_array,amplicon_dict)
     uniq_amplicon_mean_d = calculate_mean_cov_per_amplicon(cov_array,uniq_amplicon_dict)
-    write_dict_to_file(amplicon_mean_d,uniq_amplicon_mean_d,argvs.outdir,argvs.prefix)
-    barplot(amplicon_mean_d,uniq_amplicon_mean_d,bedfile,cov_array.mean(),argvs.outdir,argvs.prefix)
+
+    # Write results to a tab-delimited file
+    write_dict_to_file(amplicon_mean_d,uniq_amplicon_mean_d,ambiguity_d,uniq_ambiguity_d,argvs.outdir,argvs.prefix)
+
+    barplot(amplicon_mean_d,uniq_amplicon_mean_d,ambiguity_d,uniq_ambiguity_d,bedfile,cov_array.mean(),argvs.outdir,argvs.prefix)
 
 if __name__ == '__main__':
     argvs = setup_argparse()
