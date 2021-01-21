@@ -9,6 +9,11 @@ from pathlib import Path
 import pysam
 from collections import defaultdict
 
+# standardize the logging output
+import logging
+this_script=os.path.basename(__file__)
+logging.basicConfig(format='['+this_script+'] %(levelname)s:%(message)s', level=logging.INFO)
+
 class SmartFormatter(ap.HelpFormatter):
     def _split_lines(self, text, width):
             if text.startswith('R|'):
@@ -77,7 +82,7 @@ def covert_bed_to_amplicon_dict(input,unique=False):
 
     outs, errs = proc.communicate()
     if proc.returncode != 0:
-        print("Failed %d %s %s" % (proc.returncode, outs, errs))
+        logging.error("Failed %d %s %s" % (proc.returncode, outs, errs))
 
     return amplicon
 
@@ -105,7 +110,7 @@ def covert_bedpe_to_amplicon_dict(input,unique=False):
 
     outs, errs = proc.communicate()
     if proc.returncode != 0:
-        print("Failed %d %s %s" % (proc.returncode, outs, errs))
+        logging.error("Failed %d %s %s" % (proc.returncode, outs, errs))
 
     return amplicon
 
@@ -139,10 +144,10 @@ def parse_bam_file(bam,pp,outdir):
 
         proper_pairedreads.close()
         samfile.close()
-        print("Total Reads: %d" % (allcount))
-        print("Proper Paired Reads: %d" % (ppcount))
+        logging.info("Total Reads: %d" % (allcount))
+        logging.info("Proper Paired Reads: %d" % (ppcount))
         if ppcount==0:
-            print("Failed: There is no proper paired reads in your input file %s." % (bam))
+            logging.error("Failed: There is no proper paired reads in your input file %s." % (bam))
             sys.exit()
         
     cov_list = []
@@ -170,7 +175,6 @@ def calculate_N_per_amplicon(cov_np_array,amplicon_d):
         else:
             arr = cov_np_array[start:end]
             num_low_depth[key] = np.size(np.where(arr < 10))
-            sys.exit()
     return num_low_depth
     
 def write_dict_to_file(mean_d,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,outdir,prefix):
@@ -180,9 +184,15 @@ def write_dict_to_file(mean_d,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,outdir,pr
     except OSError:
         pass
     with open(output_amplicon_cov_txt,"w") as f:
-        f.write("ID\tWhole_Amplicon\tUnique\n")
+        f.write("ID\tWhole_Amplicon\tUnique_Amplicon\tWhole_Amplicon_Ns\tUnique_Amplicon_Ns\n")
         for key in mean_d:
-            f.write("%s\t%.2f\t%.2f\n" % (key,mean_d[key],uniq_mean_d[key]))
+            f.write("%s\t%.2f\t%.2f\t%.2f\t%.2f\n" %
+              (
+                key,
+                mean_d[key],uniq_mean_d[key],
+                ambiguity_d[key],uniq_ambiguity_d[key]
+              )
+            )
       
 
 def barplot(mean_dict,uniq_mean_d,input_bed,overall_mean,outdir,prefix):
@@ -359,7 +369,7 @@ def run(argvs):
         prefix = Path(argvs.bam).stem
     if not argvs.prefix:
         argvs.prefix = prefix
-        
+
     # Count the number of Ns < 10 per amplicon
     ambiguity_d = calculate_N_per_amplicon(cov_array,amplicon_dict)
     uniq_ambiguity_d = calculate_N_per_amplicon(cov_array,uniq_amplicon_dict)
