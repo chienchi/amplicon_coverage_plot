@@ -103,9 +103,9 @@ cd tests
 
 <img width="465" alt="Screen Shot 2020-06-15 at 3 29 53 PM" src="https://user-images.githubusercontent.com/737589/84708117-1fc2e480-af1d-11ea-8411-35210a8dd6fa.png">
 
-* Whole_Amplicon_Ns(cov<10): The number of aligned position has coverage < 10 or (--mincov) in the Whole Amplicon region
+* Whole_Amplicon_Ns(cov<10): The number of aligned position with coverage < 10 or (--mincov) in the Whole Amplicon region
 
-* Unique_Amplicon_Ns(cov<10): The number of aligned position has coverage < 10 or (--mincov) in the Unique region
+* Unique_Amplicon_Ns(cov<10): The number of aligned position with coverage < 10 or (--mincov) in the Unique region
 
 -- prefix_amplicon_coverage.html
 
