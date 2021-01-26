@@ -3,7 +3,7 @@ import sys
 
 setup(
     name='amplicov',
-    version= '0.1.3',
+    version= '0.1.4',
     author='Chienchi Lo',
     author_email='chienchi@lanl.gov',
     packages=find_packages(),
