@@ -45,7 +45,7 @@ def setup_argparse():
     parser.add_argument('--pp', action='store_true', help='process proper paired only reads from bam file (illumina)')
     parser.add_argument('--mincov', metavar='[INT]', type=int, help='minimum coverage to count as ambiguous N site [default:10]', default=10)
     
-    parser.add_argument('--version', action='version', version='%(prog)s 0.1.4')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.2.0')
     args_parsed = parser.parse_args()
     if not args_parsed.outdir:
         args_parsed.outdir = os.getcwd()
