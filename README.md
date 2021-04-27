@@ -1,5 +1,5 @@
 # amplicon_coverage_plot
-[![DOI](https://zenodo.org/badge/270555241.svg)](https://zenodo.org/badge/latestdoi/270555241)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4469318.svg)](https://doi.org/10.5281/zenodo.4469318)
 [![Build Status](https://travis-ci.org/chienchi/amplicon_coverage_plot.svg?branch=master)](https://travis-ci.org/chienchi/amplicon_coverage_plot)
 [![codecov](https://codecov.io/gh/chienchi/amplicon_coverage_plot/branch/master/graph/badge.svg)](https://codecov.io/gh/chienchi/amplicon_coverage_plot)
 
