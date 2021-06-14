@@ -62,6 +62,8 @@ optional arguments:
                         (illumina)
   --mincov [INT]        minimum coverage to count as ambiguous N site
                         [default:10]
+   -r [STR], --refID [STR]
+                        reference accession (bed file first field
   --version             show program's version number and exit
 
 Amplicon Input (required, mutually exclusive):
