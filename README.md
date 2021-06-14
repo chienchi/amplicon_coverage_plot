@@ -62,8 +62,10 @@ optional arguments:
                         (illumina)
   --mincov [INT]        minimum coverage to count as ambiguous N site
                         [default:10]
-   -r [STR], --refID [STR]
-                        reference accession (bed file first field
+  -r [STR], --refID [STR]
+                        reference accession (bed file first field)
+  --depth_lines DEPTH_LINES [DEPTH_LINES ...]
+                        Add option to display lines at these depths (provide depths as a list of integers) [default:5 10 20 50]
   --version             show program's version number and exit
 
 Amplicon Input (required, mutually exclusive):
