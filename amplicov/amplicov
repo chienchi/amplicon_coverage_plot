@@ -46,6 +46,7 @@ def setup_argparse():
     parser.add_argument('--mincov', metavar='[INT]', type=int, help='minimum coverage to count as ambiguous N site [default:10]', default=10)
     parser.add_argument('-r', '--refID', metavar='[STR]',type=str , help='reference accession (bed file first field')
     
+    parser.add_argument('--depth_lines', default=[5,10,20,50], type=int, nargs='+', help='Add option to display lines at these depths (provide depths as a list of integers)')
     parser.add_argument('--version', action='version', version='%(prog)s 0.2.0')
     args_parsed = parser.parse_args()
     if not args_parsed.outdir:
@@ -229,7 +230,7 @@ def write_dict_to_file(mean_d,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,outdir,pr
             )
       
 
-def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall_mean,outdir,prefix,mincov):
+def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall_mean,outdir,prefix,mincov,depth_lines=[5,10,20,50]):
     #plot bar chart
     x_name=Path(input_bed).stem
     x=list(mean_dict.keys())
@@ -276,34 +277,29 @@ def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall
                     )
                 )]
 
-    depth5x = [dict(type='line',
-                    xref='paper',x0=0,x1=0.94,
-                    yref='y',y0=5,y1=5,
-                    line=dict(
-                        color="black",
-                        width=1,
-                        dash='dot',
-                    )
-                )]
-    depth10x = [dict(type='line',
-                    xref='paper',x0=0,x1=0.94,
-                    yref='10',y0=10,y1=10,
-                    line=dict(
-                        color="black",
-                        width=1,
-                        dash='dot',
-                    )
-                )]
-    depth20x = [dict(type='line',
-                    xref='paper',x0=0,x1=0.94,
-                    yref='y',y0=20,y1=20,
-                    line=dict(
-                        color="black",
-                        width=1,
-                        dash='dot',
-                    )
-                )]
+    depth_buttons = list([
+        dict(label="Mean(" + str(int(overall_mean)) + 'X)',
+             method="relayout",
+             args=["shapes", depthMean])])
 
+    depth_selectors = depthMean[:]
+    for depth in depth_lines:
+        name = '{}X'.format(depth)
+        depth_selector = [dict(type='line',
+                               xref='paper', x0=0, x1=0.94,
+                               yref='y', y0=depth, y1=depth,
+                               line=dict(
+                                   color="black",
+                                   width=1,
+                                   dash='dot',
+                               ))]
+        depth_selectors.extend(depth_selector)
+        depth_buttons.append(dict(label=name,
+                                  method="relayout",
+                                  args=["shapes", depth_selector]))
+    depth_buttons.append(
+        dict(label="All", method="relayout", args=["shapes", depth_selectors])
+    )
     updatemenus = list([
         dict(
              buttons=list([
@@ -338,28 +334,13 @@ def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall
              yanchor="top"
         ),
         dict(
-            buttons=list([
-                dict(label="Mean(" + str(int(overall_mean)) + 'X)',
-                 method="relayout",
-                 args=["shapes", depthMean]),
-                dict(label="5X",
-                 method="relayout",
-                 args=["shapes", depth5x]),
-                dict(label="10X",
-                 method="relayout",
-                 args=["shapes", depth10x]),
-                dict(label="20X",
-                 method="relayout",
-                 args=["shapes", depth20x]),
-                dict(label="All",
-                 method="relayout",
-                 args=["shapes", depthMean + depth5x + depth10x + depth20x])
-                ]),
+            buttons=depth_buttons,
              direction="down",
              x=0.30,
              xanchor="left",
              y=1.03,
-             yanchor="top"
+             yanchor="top",
+             showactive=True
         )
     ])
 
@@ -459,7 +440,7 @@ def run(argvs):
     # Write results to a tab-delimited file
     write_dict_to_file(amplicon_mean_d,uniq_amplicon_mean_d,ambiguity_d,uniq_ambiguity_d,argvs.outdir,argvs.prefix,argvs.mincov)
 
-    barplot(amplicon_mean_d,uniq_amplicon_mean_d,ambiguity_d,uniq_ambiguity_d,bedfile,cov_array.mean(),argvs.outdir,argvs.prefix,argvs.mincov)
+    barplot(amplicon_mean_d,uniq_amplicon_mean_d,ambiguity_d,uniq_ambiguity_d,bedfile,cov_array.mean(),argvs.outdir,argvs.prefix,argvs.mincov,argvs.depth_lines)
 
 if __name__ == '__main__':
     argvs = setup_argparse()
