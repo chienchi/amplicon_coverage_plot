@@ -4,10 +4,10 @@ rootdir=$( cd $(dirname $0) ; pwd -P )
 tempdir=$rootdir/tmpOut
 
 test_result(){
-	Test=$rootdir/$tempdir/output_amplicon_coverage.html
-	Expect=$rootdir/output.html
+	Test=$tempdir/output_amplicon_coverage.txt
+	Expect=$rootdir/output.txt
 	testName="run test";
-	if diff <(tail output.html) <(tail $tempdir/output_amplicon_coverage.html)
+	if diff <(tail $Expect) <(tail $Test)
 	then
 		echo "$testName passed!"
 		touch "$tempdir/test.success"
