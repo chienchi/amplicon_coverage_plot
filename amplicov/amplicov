@@ -44,9 +44,9 @@ def setup_argparse():
     #optGrp = parser.add_argument_group('Options')
     parser.add_argument('--pp', action='store_true', help='process proper paired only reads from bam file (illumina)')
     parser.add_argument('--mincov', metavar='[INT]', type=int, help='minimum coverage to count as ambiguous N site [default:10]', default=10)
-    parser.add_argument('-r', '--refID', metavar='[STR]',type=str , help='reference accession (bed file first field')
+    parser.add_argument('-r', '--refID', metavar='[STR]',type=str , help='reference accession (bed file first field)')
     
-    parser.add_argument('--depth_lines', default=[5,10,20,50], type=int, nargs='+', help='Add option to display lines at these depths (provide depths as a list of integers)')
+    parser.add_argument('--depth_lines', default=[5,10,20,50], type=int, nargs='+', help='Add option to display lines at these depths (provide depths as a list of integers) [default:5 10 20 50]')
     parser.add_argument('--version', action='version', version='%(prog)s 0.2.1')
     args_parsed = parser.parse_args()
     if not args_parsed.outdir:
