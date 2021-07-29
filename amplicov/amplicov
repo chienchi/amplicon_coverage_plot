@@ -29,7 +29,7 @@ def setup_argparse():
 
     inGrp = parser.add_argument_group('Amplicon Input (required, mutually exclusive)')
     inGrp_me = inGrp.add_mutually_exclusive_group(required=True)
-    inGrp_me.add_argument('--bed', metavar='[FILE]', type=str,help='amplicon bed file')
+    inGrp_me.add_argument('--bed', metavar='[FILE]', type=str,help='amplicon bed file (bed6 format)')
     inGrp_me.add_argument('--bedpe', metavar='[FILE]', type=str,help='amplicon bedpe file')
    
     covGrp = parser.add_argument_group('Coverage Input (required, mutually exclusive)')

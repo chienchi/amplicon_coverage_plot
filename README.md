@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/chienchi/amplicon_coverage_plot.svg?branch=master)](https://travis-ci.org/chienchi/amplicon_coverage_plot)
 [![codecov](https://codecov.io/gh/chienchi/amplicon_coverage_plot/branch/master/graph/badge.svg)](https://codecov.io/gh/chienchi/amplicon_coverage_plot)
 
-The script will generate an [interactive barplot](https://chienchi.github.io/amplicon_coverage_plot/index.html) given amplicon info in bed/bedpe format and coverage information in cov/bam file.
+The script will generate an [interactive barplot](https://chienchi.github.io/amplicon_coverage_plot/index.html) given amplicon info in [bed6/bedpe](https://bedtools.readthedocs.io/en/latest/content/general-usage.html#bedpe-format) format and coverage information in cov/bam file.
 
 ## Dependencies
 
@@ -69,7 +69,7 @@ optional arguments:
   --version             show program's version number and exit
 
 Amplicon Input (required, mutually exclusive):
-  --bed [FILE]          amplicon bed file
+  --bed [FILE]          amplicon bed file (bed6 format)
   --bedpe [FILE]        amplicon bedpe file
 
 Coverage Input (required, mutually exclusive):
