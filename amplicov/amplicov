@@ -255,11 +255,11 @@ def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall
 
     # coverage levels
     fig.add_trace(
-      go.Bar(x=uniq_x,y=uniq_y,marker_color=barcolor2,visible=True,name="Coverage",showlegend=False),
+      go.Bar(x=uniq_x,y=uniq_y,marker_color=barcolor2,visible=True,name="Coverage",showlegend=False, hovertemplate="Coverage: %{y:.1f}<extra></extra>"),
       secondary_y=False
     )
     fig.add_trace(
-      go.Bar(x=x, y=y, marker_color=barcolor1,visible=False,name="Coverage",showlegend=False),
+      go.Bar(x=x, y=y, marker_color=barcolor1,visible=False,name="Coverage",showlegend=False, hovertemplate="Coverage: %{y:.1f}<extra></extra>"),
       secondary_y=False
     )
     #fig = go.Figure(data=[go.Bar(x=x, y=y, marker_color=barcolor1,visible=False)])
@@ -270,11 +270,11 @@ def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall
     y2=list(ambiguity_d.values())
     uniq_y2=list(uniq_ambiguity_d.values())
     fig.add_trace(
-      go.Scatter(x=uniq_x,y=uniq_y2,marker_color='blueviolet',visible=True,name="Num of Ns (cov<" + str(mincov) +")" ),
+      go.Scatter(x=uniq_x,y=uniq_y2,marker_color='blueviolet',visible=True,name="Num of Ns (cov<" + str(mincov) +")", hovertemplate="Num of Ns: %{y}<extra></extra>" ),
       secondary_y=True
     )
     fig.add_trace(
-      go.Scatter(x=x,y=y2,marker_color='blueviolet',visible=False,name="Num of Ns (cov<" + str(mincov) +")" ),
+      go.Scatter(x=x,y=y2,marker_color='blueviolet',visible=False,name="Num of Ns (cov<" + str(mincov) +")", hovertemplate="Num of Ns: %{y}<extra></extra>" ),
       secondary_y=True
     )
     
@@ -414,7 +414,8 @@ def barplot(mean_dict,uniq_mean_d,ambiguity_d,uniq_ambiguity_d,input_bed,overall
             y=1.02,
             xanchor="right",
             x=0.95
-        )
+        ),
+        hovermode="x unified"
     )
 
     output_html = outdir + os.sep + prefix + '_amplicon_coverage.html'
