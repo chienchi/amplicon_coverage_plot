@@ -61,6 +61,17 @@ def mkdir_p(directory_name):
         if exc.errno == errno.EEXIST and os.path.isdir(directory_name):
             pass
 
+def is_bed6(input):
+    with open(input,'r') as f:
+        bedline=[]
+        num=0
+        for line in f:
+            bedline = line.rstrip().split("\t")
+            num += 1
+            if (len(bedline) != 6 or not bedline[1].isnumeric() or not bedline[2].isnumeric()):
+                logging.error(f"The input bed file is not in bed6 format.\nline:{num} {line}")
+                sys.exit(1)
+
 def covert_bed_to_amplicon_dict(input,cov_array,RefID="",unique=False):
     ## convert bed file to amplicon region dictionary
     input_bed = input
@@ -73,9 +84,9 @@ def covert_bed_to_amplicon_dict(input,cov_array,RefID="",unique=False):
     previous_id=''
     outs, errs = proc.communicate()
     if proc.returncode == 0:
-    	outs = outs.splitlines()
+        outs = outs.splitlines()
     else:
-    	logging.error("Failed %d %s %s" % (proc.returncode, outs, errs))
+        logging.error("Failed %d %s %s" % (proc.returncode, outs, errs))
    
     for i in range(len(outs)):
         fstart, fend, id, rstart, rend = outs[i].decode().rstrip().split("\t")
@@ -417,6 +428,7 @@ def run(argvs):
         cov_array = parse_bam_file(argvs.bam,argvs.pp, argvs.outdir, argvs.refID)
         prefix = Path(argvs.bam).stem 
     if (argvs.bed):
+        is_bed6(argvs.bed)
         amplicon_dict = covert_bed_to_amplicon_dict(argvs.bed,cov_array,argvs.refID)
         uniq_amplicon_dict = covert_bed_to_amplicon_dict(argvs.bed,cov_array,argvs.refID,True)
         bedfile = argvs.bed
