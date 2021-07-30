@@ -66,6 +66,7 @@ optional arguments:
                         reference accession (bed file first field)
   --depth_lines DEPTH_LINES [DEPTH_LINES ...]
                         Add option to display lines at these depths (provide depths as a list of integers) [default:5 10 20 50]
+  --gff [FILE]          gff file for data hover info annotation
   --version             show program's version number and exit
 
 Amplicon Input (required, mutually exclusive):
