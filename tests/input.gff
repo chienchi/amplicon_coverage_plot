@@ -1,0 +1,75 @@
+##gff-version 3
+##sequence-region NC_045512.2 1 29870
+# conversion-by bp_genbank2gff3.pl
+# organism Wuhan seafood market pneumonia virus
+# Note Wuhan seafood market pneumonia virus isolate Wuhan-Hu-1, complete genome.
+# date 28-JAN-2020
+NC_045512.2	GenBank	region	1	29869	.	+	1	ID=NC_045512;Dbxref=BioProject:PRJNA485481,taxon:2697049;Name=NC_045512;Note=Wuhan seafood market pneumonia virus isolate Wuhan-Hu-1%2C complete genome.,REVIEWED REFSEQ: This record has been curated by NCBI staff. The reference sequence is identical to MN908947. On Jan 17,2020 this sequence version replaced NC_045512.1. Annotation was added using homology to SARSr-CoV NC_004718.3. If you have questions or suggestions,please email us at info@ncbi.nlm.nih.gov and include the accession number NC_045512.##Find all other Wuhan seafood market pneumonia virus (2019-nCov) sequences at https://www.ncbi.nlm.nih.gov/genbank/2019-ncov-seqs/ ##Assembly-Data-START## Assembly Method :: Megahit v. V1.1.3 Sequencing Technology :: Illumina ##Assembly-Data-END## COMPLETENESS: full length. ;collection_date=Dec-2019;comment1=REVIEWED REFSEQ: This record has been curated by NCBI staff. The reference sequence is identical to MN908947. On Jan 17%2C 2020 this sequence version replaced NC_045512.1. Annotation was added using homology to SARSr-CoV NC_004718.3. If you have questions or suggestions%2C please email us at info@ncbi.nlm.nih.gov and include the accession number NC_045512.##Find all other Wuhan seafood market pneumonia virus (2019-nCov) sequences at https://www.ncbi.nlm.nih.gov/genbank/2019-ncov-seqs/ ##Assembly-Data-START## Assembly Method :: Megahit v. V1.1.3 Sequencing Technology :: Illumina ##Assembly-Data-END## COMPLETENESS: full length. ;country=China;date=28-JAN-2020;host=Homo sapiens;isolate=Wuhan-Hu-1;mol_type=genomic RNA;organism=Wuhan seafood market pneumonia virus
+NC_045512.2	GenBank	5'UTR	1	265	.	+	1	ID=GenBank:5'UTR:NC_045512.2:1:265
+NC_045512.2	GenBank	gene	266	21555	.	+	1	ID=GU280_gp01;Dbxref=GeneID:43740578;Name=orf1ab;locus_tag=GU280_gp01
+NC_045512.2	GenBank	mRNA	266	21555	.	+	1	ID=GU280_gp01.t01;Parent=GU280_gp01
+NC_045512.2	GenBank	mRNA	266	13483	.	+	1	ID=GU280_gp01.t02;Parent=GU280_gp01
+NC_045512.2	GenBank	mature_protein_region	266	805	.	+	1	ID=GU280_gp01.p02;Parent=GU280_gp01.t02;Name=orf1ab;Note=nsp1%3B produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=leader protein;protein_id=YP_009725297.1
+NC_045512.2	GenBank	mature_protein_region	806	2719	.	+	1	ID=GU280_gp01.p02.mature_protein_region;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=nsp2;protein_id=YP_009725298.1
+NC_045512.2	GenBank	mature_protein_region	2720	8554	.	+	1	ID=GU280_gp01.p02.mature_protein_region.1;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=former nsp1%3B conserved domains are: N-terminal acidic (Ac)%2C predicted phosphoesterase%2C papain-like proteinase%2C Y-domain%2C transmembrane domain 1 (TM1)%2C adenosine diphosphate-ribose 1''-phosphatase (ADRP)%3B produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=nsp3;protein_id=YP_009725299.1
+NC_045512.2	GenBank	mature_protein_region	8555	10054	.	+	1	ID=GU280_gp01.p02.mature_protein_region.2;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=contains transmembrane domain 2 (TM2)%3B produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=nsp4;protein_id=YP_009725300.1
+NC_045512.2	GenBank	mature_protein_region	10055	10972	.	+	1	ID=GU280_gp01.p02.mature_protein_region.3;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=nsp5%3B main proteinase (Mpro)%3B mediates cleavages downstream of nsp4. 3D structure has been determined (Yang et al.%2C 2003)%3B produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=3C-like proteinase;protein_id=YP_009725301.1
+NC_045512.2	GenBank	mature_protein_region	10973	11842	.	+	1	ID=GU280_gp01.p02.mature_protein_region.4;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=putative transmembrane domain%3B produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=nsp6;protein_id=YP_009725302.1
+NC_045512.2	GenBank	mature_protein_region	11843	12091	.	+	1	ID=GU280_gp01.p02.mature_protein_region.5;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=nsp7;protein_id=YP_009725303.1
+NC_045512.2	GenBank	mature_protein_region	12092	12685	.	+	1	ID=GU280_gp01.p02.mature_protein_region.6;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=nsp8;protein_id=YP_009725304.1
+NC_045512.2	GenBank	mature_protein_region	12686	13024	.	+	1	ID=GU280_gp01.p02.mature_protein_region.7;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=ssRNA-binding protein%3B produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=nsp9;protein_id=YP_009725305.1
+NC_045512.2	GenBank	mature_protein_region	13025	13441	.	+	1	ID=GU280_gp01.p02.mature_protein_region.8;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=formerly known as growth-factor-like protein (GFL)%3B produced by both pp1a and pp1ab;locus_tag=GU280_gp01;product=nsp10;protein_id=YP_009725306.1
+NC_045512.2	GenBank	mature_protein_region	13442	13468	.	+	1	ID=GU280_gp01.p02.mature_protein_region.9;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=nsp12%3B RdRp%3B produced by pp1ab only;locus_tag=GU280_gp01;product=RNA-dependent RNA polymerase;protein_id=YP_009725307.1
+NC_045512.2	GenBank	mature_protein_region	13468	16236	.	+	1	ID=GU280_gp01.p02.mature_protein_region.9;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=nsp12%3B RdRp%3B produced by pp1ab only;locus_tag=GU280_gp01;product=RNA-dependent RNA polymerase;protein_id=YP_009725307.1
+NC_045512.2	GenBank	mature_protein_region	16237	18039	.	+	1	ID=GU280_gp01.p02.mature_protein_region.10;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=nsp13%3B zinc-binding domain (ZD)%2C NTPase/helicase domain (HEL)%2C RNA 5'-triphosphatase%3B produced by pp1ab only;locus_tag=GU280_gp01;product=helicase;protein_id=YP_009725308.1
+NC_045512.2	GenBank	mature_protein_region	18040	19620	.	+	1	ID=GU280_gp01.p02.mature_protein_region.111;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=nsp14%3B produced by pp1ab only;locus_tag=GU280_gp01;product=3'-to-5' exonuclease;protein_id=YP_009725309.1
+NC_045512.2	GenBank	mature_protein_region	19621	20658	.	+	1	ID=GU280_gp01.p02.mature_protein_region.1112;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=nsp15%3B produced by pp1ab only;locus_tag=GU280_gp01;product=endoRNAse;protein_id=YP_009725310.1
+NC_045512.2	GenBank	mature_protein_region	20659	21552	.	+	1	ID=GU280_gp01.p02.mature_protein_region.11113;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=nsp16%3B 2'-o-MT%3B produced by pp1ab only;locus_tag=GU280_gp01;product=2'-O-ribose methyltransferase;protein_id=YP_009725311.1
+NC_045512.2	GenBank	mature_protein_region	13442	13480	.	+	1	ID=GU280_gp01.p02.mature_protein_region.111114;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Name=orf1ab;Note=produced by pp1a only;locus_tag=GU280_gp01;product=nsp11;protein_id=YP_009725312.1
+NC_045512.2	GenBank	CDS	266	13468	.	+	1	ID=GU280_gp01.p01;Parent=GU280_gp01.t01;Dbxref=GeneID:43740578;Name=orf1ab;Note=pp1ab%3B translated by -1 ribosomal frameshift;codon_start=1;locus_tag=GU280_gp01;product=orf1ab polyprotein;protein_id=YP_009724389.1;ribosomal_slippage=_no_value;translation=length.7096
+NC_045512.2	GenBank	CDS	13468	21555	.	+	1	ID=GU280_gp01.p01;Parent=GU280_gp01.t01;Dbxref=GeneID:43740578;Name=orf1ab;Note=pp1ab%3B translated by -1 ribosomal frameshift;codon_start=1;locus_tag=GU280_gp01;product=orf1ab polyprotein;protein_id=YP_009724389.1;ribosomal_slippage=_no_value;translation=length.7096
+NC_045512.2	GenBank	CDS	266	13483	.	+	1	ID=GU280_gp01.p02.CDS;Parent=GU280_gp01.t02;Alias=GU280_gp01.p02;Dbxref=GeneID:43740578;Name=orf1ab;Note=pp1a;codon_start=1;locus_tag=GU280_gp01;product=orf1a polyprotein;protein_id=YP_009725295.1;translation=length.4405
+NC_045512.2	GenBank	exon	266	13468	.	+	1	Parent=GU280_gp01.t01
+NC_045512.2	GenBank	exon	13468	21555	.	+	1	Parent=GU280_gp01.t01
+NC_045512.2	GenBank	exon	266	13483	.	+	1	Parent=GU280_gp01.t02
+NC_045512.2	GenBank	gene	21563	25384	.	+	1	ID=GU280_gp02;Dbxref=GeneID:43740568;Name=S;locus_tag=GU280_gp02
+NC_045512.2	GenBank	mRNA	21563	25384	.	+	1	ID=GU280_gp02.t01;Parent=GU280_gp02
+NC_045512.2	GenBank	CDS	21563	25384	.	+	1	ID=GU280_gp02.p01;Parent=GU280_gp02.t01;Dbxref=GeneID:43740568;Name=S;Note=structural protein%3B spike protein;codon_start=1;locus_tag=GU280_gp02;product=surface glycoprotein;protein_id=YP_009724390.1;translation=length.1273
+NC_045512.2	GenBank	exon	21563	25384	.	+	1	Parent=GU280_gp02.t01
+NC_045512.2	GenBank	gene	25393	26220	.	+	1	ID=GU280_gp03;Dbxref=GeneID:43740569;Name=ORF3a;locus_tag=GU280_gp03
+NC_045512.2	GenBank	mRNA	25393	26220	.	+	1	ID=GU280_gp03.t01;Parent=GU280_gp03
+NC_045512.2	GenBank	CDS	25393	26220	.	+	1	ID=GU280_gp03.p01;Parent=GU280_gp03.t01;Dbxref=GeneID:43740569;Name=ORF3a;codon_start=1;locus_tag=GU280_gp03;product=ORF3a protein;protein_id=YP_009724391.1;translation=length.275
+NC_045512.2	GenBank	exon	25393	26220	.	+	1	Parent=GU280_gp03.t01
+NC_045512.2	GenBank	gene	26245	26472	.	+	1	ID=GU280_gp04;Dbxref=GeneID:43740570;Name=E;locus_tag=GU280_gp04
+NC_045512.2	GenBank	mRNA	26245	26472	.	+	1	ID=GU280_gp04.t01;Parent=GU280_gp04
+NC_045512.2	GenBank	CDS	26245	26472	.	+	1	ID=GU280_gp04.p01;Parent=GU280_gp04.t01;Dbxref=GeneID:43740570;Name=E;Note=ORF4%3B structural protein%3B E protein;codon_start=1;locus_tag=GU280_gp04;product=envelope protein;protein_id=YP_009724392.1;translation=length.75
+NC_045512.2	GenBank	exon	26245	26472	.	+	1	Parent=GU280_gp04.t01
+NC_045512.2	GenBank	gene	26523	27191	.	+	1	ID=GU280_gp05;Dbxref=GeneID:43740571;Name=M;locus_tag=GU280_gp05
+NC_045512.2	GenBank	mRNA	26523	27191	.	+	1	ID=GU280_gp05.t01;Parent=GU280_gp05
+NC_045512.2	GenBank	CDS	26523	27191	.	+	1	ID=GU280_gp05.p01;Parent=GU280_gp05.t01;Dbxref=GeneID:43740571;Name=M;Note=ORF5%3B structural protein;codon_start=1;locus_tag=GU280_gp05;product=membrane glycoprotein;protein_id=YP_009724393.1;translation=length.222
+NC_045512.2	GenBank	exon	26523	27191	.	+	1	Parent=GU280_gp05.t01
+NC_045512.2	GenBank	gene	27202	27387	.	+	1	ID=GU280_gp06;Dbxref=GeneID:43740572;Name=ORF6;locus_tag=GU280_gp06
+NC_045512.2	GenBank	mRNA	27202	27387	.	+	1	ID=GU280_gp06.t01;Parent=GU280_gp06
+NC_045512.2	GenBank	CDS	27202	27387	.	+	1	ID=GU280_gp06.p01;Parent=GU280_gp06.t01;Dbxref=GeneID:43740572;Name=ORF6;codon_start=1;locus_tag=GU280_gp06;product=ORF6 protein;protein_id=YP_009724394.1;translation=length.61
+NC_045512.2	GenBank	exon	27202	27387	.	+	1	Parent=GU280_gp06.t01
+NC_045512.2	GenBank	gene	27394	27759	.	+	1	ID=GU280_gp07;Dbxref=GeneID:43740573;Name=ORF7a;locus_tag=GU280_gp07
+NC_045512.2	GenBank	mRNA	27394	27759	.	+	1	ID=GU280_gp07.t01;Parent=GU280_gp07
+NC_045512.2	GenBank	CDS	27394	27759	.	+	1	ID=GU280_gp07.p01;Parent=GU280_gp07.t01;Dbxref=GeneID:43740573;Name=ORF7a;codon_start=1;locus_tag=GU280_gp07;product=ORF7a protein;protein_id=YP_009724395.1;translation=length.121
+NC_045512.2	GenBank	exon	27394	27759	.	+	1	Parent=GU280_gp07.t01
+NC_045512.2	GenBank	gene	27756	27887	.	+	1	ID=GU280_gp08;Dbxref=GeneID:43740574;Name=ORF7b;locus_tag=GU280_gp08
+NC_045512.2	GenBank	mRNA	27756	27887	.	+	1	ID=GU280_gp08.t01;Parent=GU280_gp08
+NC_045512.2	GenBank	CDS	27756	27887	.	+	1	ID=GU280_gp08.p01;Parent=GU280_gp08.t01;Dbxref=GeneID:43740574;Name=ORF7b;codon_start=1;locus_tag=GU280_gp08;product=ORF7b;protein_id=YP_009725296.1;translation=length.43
+NC_045512.2	GenBank	exon	27756	27887	.	+	1	Parent=GU280_gp08.t01
+NC_045512.2	GenBank	gene	27894	28259	.	+	1	ID=GU280_gp09;Dbxref=GeneID:43740577;Name=ORF8;locus_tag=GU280_gp09
+NC_045512.2	GenBank	mRNA	27894	28259	.	+	1	ID=GU280_gp09.t01;Parent=GU280_gp09
+NC_045512.2	GenBank	CDS	27894	28259	.	+	1	ID=GU280_gp09.p01;Parent=GU280_gp09.t01;Dbxref=GeneID:43740577;Name=ORF8;codon_start=1;locus_tag=GU280_gp09;product=ORF8 protein;protein_id=YP_009724396.1;translation=length.121
+NC_045512.2	GenBank	exon	27894	28259	.	+	1	Parent=GU280_gp09.t01
+NC_045512.2	GenBank	gene	28274	29533	.	+	1	ID=GU280_gp10;Dbxref=GeneID:43740575;Name=N;locus_tag=GU280_gp10
+NC_045512.2	GenBank	mRNA	28274	29533	.	+	1	ID=GU280_gp10.t01;Parent=GU280_gp10
+NC_045512.2	GenBank	CDS	28274	29533	.	+	1	ID=GU280_gp10.p01;Parent=GU280_gp10.t01;Dbxref=GeneID:43740575;Name=N;Note=ORF9%3B structural protein;codon_start=1;locus_tag=GU280_gp10;product=nucleocapsid phosphoprotein;protein_id=YP_009724397.2;translation=length.419
+NC_045512.2	GenBank	exon	28274	29533	.	+	1	Parent=GU280_gp10.t01
+NC_045512.2	GenBank	gene	29558	29674	.	+	1	ID=GU280_gp11;Dbxref=GeneID:43740576;Name=ORF10;locus_tag=GU280_gp11
+NC_045512.2	GenBank	mRNA	29558	29674	.	+	1	ID=GU280_gp11.t01;Parent=GU280_gp11
+NC_045512.2	GenBank	3'UTR	29675	29869	.	+	1	Parent=GU280_gp11
+NC_045512.2	GenBank	CDS	29558	29674	.	+	1	ID=GU280_gp11.p01;Parent=GU280_gp11.t01;Dbxref=GeneID:43740576;Name=ORF10;codon_start=1;locus_tag=GU280_gp11;product=ORF10 protein;protein_id=YP_009725255.1;translation=length.38
+NC_045512.2	GenBank	exon	29558	29674	.	+	1	Parent=GU280_gp11.t01

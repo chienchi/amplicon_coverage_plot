@@ -23,7 +23,8 @@ echo "Running Test ..."
 
 rm -rf $tempdir
 
-$rootdir/../amplicov/amplicov --bed input.bed --cov coverage.txt --prefix output --outdir $tempdir || true
+$rootdir/../amplicov/amplicov --gff input.gff --bed input.bed --cov coverage.txt --prefix output --outdir $tempdir || true
+#$rootdir/../amplicov/amplicov --bed input.bed --cov coverage.txt --prefix output --outdir $tempdir || true
 
 test_result;
 
