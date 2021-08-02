@@ -151,7 +151,7 @@ def convert_bedpe_to_amplicon_dict(input,cov_array,RefID="",unique=False):
 
     return amplicon
 
-def parse_gff_file(input):
+def parse_gff_file(input,RefID):
     gff_file = input
     anno_dict = defaultdict(dict)
     f = open(gff_file,'r')
@@ -160,7 +160,10 @@ def parse_gff_file(input):
             continue
         else:
             gffline = line.rstrip().split("\t")
+            gff_ref_id = gffline[0].replace(".","_")
             if gffline[2] == "CDS":
+                if RefID and (RefID != gff_ref_id and RefID != gffline[0]):
+                    continue
                 annotations = dict(x.split("=") for x in gffline[8].split(";"))
                 for i in range(int(gffline[3]),int(gffline[4])+1):
                     anno_dict[i]['name']= annotations['Name'] if 'Name' in annotations else None
@@ -506,7 +509,7 @@ def run(argvs):
         uniq_amplicon_dict = convert_bedpe_to_amplicon_dict(argvs.bedpe,cov_array,argvs.refID,True)
         bedfile = argvs.bedpe
     
-    anno_dict = parse_gff_file(argvs.gff) if (argvs.gff) else None
+    anno_dict = parse_gff_file(argvs.gff,argvs.refID) if (argvs.gff) else None
     
     if not argvs.prefix:
         argvs.prefix = prefix
