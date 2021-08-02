@@ -1,5 +1,6 @@
 # amplicon_coverage_plot
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5154045.svg)](https://doi.org/10.5281/zenodo.5154045)
+[![Anaconda-Server Badge](https://anaconda.org/bioconda/amplicon_coverage_plot/badges/installer/conda.svg)](https://conda.anaconda.org/bioconda)
 [![Build Status](https://travis-ci.org/chienchi/amplicon_coverage_plot.svg?branch=master)](https://travis-ci.org/chienchi/amplicon_coverage_plot)
 [![codecov](https://codecov.io/gh/chienchi/amplicon_coverage_plot/branch/master/graph/badge.svg)](https://codecov.io/gh/chienchi/amplicon_coverage_plot)
 
@@ -25,6 +26,12 @@ The script will generate an [interactive barplot](https://chienchi.github.io/amp
 
 ```
 pip install amplicov
+```
+
+### Install by conda
+
+```
+conda install -c bioconda amplicon_coverage_plot 
 ```
 
 ### Install from source
