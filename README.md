@@ -48,7 +48,7 @@ cd amplicon_coverage_plot
 python setup.py install
 ```
 
-If the installation was succesful, you should be able to type `amplicon_coverage.py -h` and get a help message on how to use the tool.
+If the installation was succesful, you should be able to type `amplicov -h` and get a help message on how to use the tool.
 
 ```
 amplicov -h
