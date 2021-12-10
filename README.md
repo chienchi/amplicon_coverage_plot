@@ -67,6 +67,7 @@ optional arguments:
   -h, --help            show this help message and exit
   --pp                  process proper paired only reads from bam file
                         (illumina)
+  --count_primer        count overlapped primer region to unqiue coverage
   --mincov [INT]        minimum coverage to count as ambiguous N site
                         [default:10]
   -r [STR], --refID [STR]
