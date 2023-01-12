@@ -9,8 +9,8 @@ The script will generate an [interactive barplot](https://chienchi.github.io/amp
 ## Dependencies
 
 ### Programming/Scripting languages
-- [Python >=v3.7](https://www.python.org/)
-    - The pipeline has been tested in v3.7.6
+- [Python >=v3.8](https://www.python.org/)
+    - The pipeline has been tested in v3.8.10
 
 ### Python packages
 - [numpy >=1.15.1](http://www.numpy.org/) 
