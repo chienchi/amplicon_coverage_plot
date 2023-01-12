@@ -1,5 +1,5 @@
 # amplicon_coverage_plot
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5771265.svg)](https://doi.org/10.5281/zenodo.5771265)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7531741.svg)](https://doi.org/10.5281/zenodo.7531741)
 [![Anaconda-Server Badge](https://anaconda.org/bioconda/amplicon_coverage_plot/badges/version.svg)](https://anaconda.org/bioconda/amplicon_coverage_plot)
 [![Build Status](https://travis-ci.org/chienchi/amplicon_coverage_plot.svg?branch=master)](https://travis-ci.org/chienchi/amplicon_coverage_plot)
 [![codecov](https://codecov.io/gh/chienchi/amplicon_coverage_plot/branch/master/graph/badge.svg)](https://codecov.io/gh/chienchi/amplicon_coverage_plot)
