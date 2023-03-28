@@ -106,7 +106,7 @@ def convert_bed_to_amplicon_dict(input,cov_array,RefID="",unique=False, count_pr
         unique_region_set = set(np.where(cov_zero_array == 1)[0]) if count_primer else set(np.where(cov_zero_array == 1)[0]) - set(primers_pos)
         for i in range(len(outs)):
             fstart, fend, id, rstart, rend = outs[i].decode().rstrip().split("\t")
-            unique_region = sorted(unique_region_set.intersection(set(range(int(fstart),int(rend)))))
+            unique_region = sorted(unique_region_set.intersection(set(range(int(fend),int(rstart)))))
             if unique_region:
                 amplicon[id] = range(list(unique_region)[0],list(unique_region)[-1]+1)
             else:
@@ -144,7 +144,7 @@ def convert_bedpe_to_amplicon_dict(input,cov_array,RefID="",unique=False, count_
         unique_region_set = set(np.where(cov_zero_array == 1)[0]) if count_primer else set(np.where(cov_zero_array == 1)[0]) - set(primers_pos)
         for i in range(len(outs)):
             fstart, fend, rstart, rend, id = outs[i].decode().rstrip().split("\t")
-            unique_region = sorted(unique_region_set.intersection(set(range(int(fstart),int(rend)))))
+            unique_region = sorted(unique_region_set.intersection(set(range(int(fend),int(rstart)))))
             if unique_region:
                 amplicon[id] = range(list(unique_region)[0],list(unique_region)[-1]+1)
             else:
