@@ -83,7 +83,7 @@ def convert_bed_to_amplicon_dict(input,cov_array,RefID="",unique=False, count_pr
     amplicon=defaultdict(dict)
     primers_pos=list()
     RefID = '""' if RefID is None else RefID
-    cmd = 'grep -v alt %s | grep %s | paste - - | cut -f 2,3,4,8,9 | sed -e "s/_LEFT//g" -e "s/_RIGHT//g" ' % (input_bed, RefID)
+    cmd = 'grep -v alt %s | grep -w %s | paste - - | cut -f 2,3,4,8,9 | sed -e "s/_LEFT//g" -e "s/_RIGHT//g" ' % (input_bed, RefID)
     proc = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE) 
     previous_id=''
     outs, errs = proc.communicate()
