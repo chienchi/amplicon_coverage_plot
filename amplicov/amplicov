@@ -49,7 +49,7 @@ def setup_argparse():
     
     parser.add_argument('--depth_lines', default=[5,10,20,50], type=int, nargs='+', help='Add option to display lines at these depths (provide depths as a list of integers) [default:5 10 20 50]')
     parser.add_argument('--gff', metavar='[FILE]', type=str, help='gff file for data hover info annotation')
-    parser.add_argument('--version', action='version', version='%(prog)s 0.3.3')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.3.4')
     args_parsed = parser.parse_args()
     if not args_parsed.outdir:
         args_parsed.outdir = os.getcwd()
