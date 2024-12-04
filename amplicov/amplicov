@@ -121,7 +121,7 @@ def convert_bedpe_to_amplicon_dict(input,cov_array,RefID="",unique=False, count_
     amplicon=defaultdict(dict)
     primers_pos=list()
     RefID = '""' if RefID is None else RefID
-    cmd = 'grep %s %s | cut -f 2,3,5,6,7 ' % (RefID, input_bedpe)
+    cmd = 'grep -w %s %s | cut -f 2,3,5,6,7 ' % (RefID, input_bedpe)
     proc = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE) 
     previous_id=''
     outs, errs = proc.communicate()
