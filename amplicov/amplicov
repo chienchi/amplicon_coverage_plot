@@ -82,8 +82,11 @@ def convert_bed_to_amplicon_dict(input,cov_array,RefID="",unique=False, count_pr
     cov_zero_array = np.zeros_like(cov_array)
     amplicon=defaultdict(dict)
     primers_pos=list()
-    RefID = '""' if RefID is None else RefID
-    cmd = 'grep -v alt %s | grep -w %s | paste - - | cut -f 2,3,4,8,9 | sed -e "s/_LEFT//g" -e "s/_RIGHT//g" ' % (input_bed, RefID)
+    if RefID:
+        cmd = 'grep -v alt %s | grep -w %s | paste - - | cut -f 2,3,4,8,9 | sed -e "s/_LEFT//g" -e "s/_RIGHT//g" ' % (input_bed, RefID)
+    else:
+        cmd = 'grep -v alt %s | paste - - | cut -f 2,3,4,8,9 | sed -e "s/_LEFT//g" -e "s/_RIGHT//g" ' % (input_bed)
+
     proc = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE) 
     previous_id=''
     outs, errs = proc.communicate()
@@ -120,8 +123,10 @@ def convert_bedpe_to_amplicon_dict(input,cov_array,RefID="",unique=False, count_
     cov_zero_array = np.zeros_like(cov_array)
     amplicon=defaultdict(dict)
     primers_pos=list()
-    RefID = '""' if RefID is None else RefID
-    cmd = 'grep -w %s %s | cut -f 2,3,5,6,7 ' % (RefID, input_bedpe)
+    if RefID:
+        cmd = 'grep -w %s %s | cut -f 2,3,5,6,7 ' % (RefID, input_bedpe)
+    else:
+        cmd = 'cut -f 2,3,5,6,7 %s ' % (input_bedpe)
     proc = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE) 
     previous_id=''
     outs, errs = proc.communicate()
